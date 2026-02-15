@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tetris + Heuristic Solver</title>
+  <style>
+    :root {
+      --bg-1: #0f172a;
+      --bg-2: #111827;
+      --border: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, var(--bg-1), var(--bg-2));
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      padding: 20px;
+    }
+
+    .layout {
+      width: min(100%, 360px);
+      display: flex;
+      justify-content: center;
+    }
+
+    #board {
+      border: 2px solid var(--border);
+      background: #0b1022;
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    @media (max-width: 820px) {
+      #board {
+        width: min(100%, 360px);
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="layout">
+    <canvas id="board" width="300" height="600" aria-label="Tetris Board"></canvas>
+  </main>
+
+  <script src="./solver.js"></script>
+  <script src="./game.js"></script>
+</body>
+</html>
