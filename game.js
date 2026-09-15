@@ -596,10 +596,8 @@ function tick(now) {
 
 if (depthEl) {
   depthEl.addEventListener("change", () => {
-    const parsed = Number(depthEl.value);
-    const depth = Math.max(1, Math.min(4, Number.isFinite(parsed) ? parsed : 2));
-    depthEl.value = String(depth);
-    solver.setDepth(depth);
+    solver.setDepth(Number(depthEl.value) || 2);
+    depthEl.value = String(solver.depth);
   });
 }
 
