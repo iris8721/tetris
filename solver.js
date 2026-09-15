@@ -335,9 +335,7 @@ class TetrisSolver {
 
       if (depth > 1 && pieceSequence.length > 1) {
         const child = this.search(move.board, pieceSequence.slice(1), depth - 1);
-        if (child) {
-          score += child.score;
-        }
+        score = child ? score + child.score : -Infinity;
       }
 
       if (best === null || score > best.score) {
