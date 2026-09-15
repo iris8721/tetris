@@ -220,8 +220,7 @@ function setGameOver() {
 }
 
 function spawnPiece() {
-  fillQueue();
-  const type = state.queue.shift();
+  const type = state.queue.shift() || drawFromBag();
   fillQueue();
 
   const rotationIndex = 0;
@@ -230,10 +229,6 @@ function spawnPiece() {
   const y = -shape.length;
 
   state.current = { type, rotationIndex, x, y };
-
-  if (collides(state.board, shape, x, y)) {
-    setGameOver();
-  }
 }
 
 function clearLines() {
@@ -274,6 +269,7 @@ function lockPiece() {
   }
 
   const pieceId = PIECES[state.current.type].id;
+  const cells = [];
 
   for (let sy = 0; sy < shape.length; sy += 1) {
     for (let sx = 0; sx < shape[sy].length; sx += 1) {
@@ -289,8 +285,12 @@ function lockPiece() {
         return;
       }
 
-      state.board[by][bx] = pieceId;
+      cells.push([bx, by]);
     }
+  }
+
+  for (const [bx, by] of cells) {
+    state.board[by][bx] = pieceId;
   }
 
   const cleared = clearLines();
