@@ -524,7 +524,14 @@ function restartGame() {
   renderCurrentPiece();
 }
 
+const GAME_KEYS = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "KeyX", "KeyZ", "Space"]);
+
 function handleKeydown(event) {
+  if (!GAME_KEYS.has(event.code) || event.target instanceof HTMLInputElement) {
+    return;
+  }
+  event.preventDefault();
+
   if (state.gameOver || state.auto || !state.current) {
     return;
   }
@@ -549,11 +556,8 @@ function handleKeydown(event) {
     case "Space":
       hardDrop();
       break;
-    default:
-      return;
   }
 
-  event.preventDefault();
   updateHud();
 }
 
